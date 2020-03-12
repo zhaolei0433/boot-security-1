@@ -1,15 +1,19 @@
 package com.example.service.impl;
 
+import com.example.security.model.MyUserDetails;
 import com.example.service.ISysUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author zhaolei
@@ -30,8 +34,8 @@ public class SysUserServiceImpl implements ISysUserService {
     }
 
     @Override
-    public void addSysUser() {
-
-        inMemoryUserDetailsManager.createUser();
+    public void addSysUser(String username, String password) {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        //SimpleGrantedAuthority authority = new SimpleGrantedAuthority(SystemDefines.USER_TYPE_SUPER_ADMIN_TIP);
     }
 }

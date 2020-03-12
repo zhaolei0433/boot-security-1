@@ -8,6 +8,6 @@ package com.example.service;
  */
 public interface ISysUserService {
 
-    public void addSysUser();
+    public void addSysUser(String username, String password);
 
 }
