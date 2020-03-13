@@ -1,5 +1,9 @@
 package com.example.service;
 
+import com.example.security.model.MyUserDetails;
+
+import java.util.List;
+
 /**
  * @author zhaolei
  * Create: 2020/2/25 13:45
@@ -8,6 +12,7 @@ package com.example.service;
  */
 public interface ISysUserService {
 
-    public void addSysUser(String username, String password);
+    void addSysUser(String username, String password);
 
+    MyUserDetails getSysUser(String username);
 }
