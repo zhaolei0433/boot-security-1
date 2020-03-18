@@ -6,6 +6,10 @@ server:
 spring:
   application:
     name: boot-layui-demo
+  security:
+    user:
+      name: zhaolei
+      password: 123456
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html

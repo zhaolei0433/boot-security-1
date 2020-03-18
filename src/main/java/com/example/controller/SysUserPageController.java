@@ -21,6 +21,4 @@ public class SysUserPageController {
     public SysUserPageController(ISysUserService sysUserService) {
         this.sysUserService = sysUserService;
     }
-
-
 }

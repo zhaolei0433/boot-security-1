@@ -2,11 +2,16 @@ package com.example.controller;
 
 import com.example.global.constants.SystemDefines;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,11 +31,15 @@ public class SysUserLoginController {
      * @return
      * @throws Exception
      */
-    @RequestMapping("/index")
+    @RequestMapping(path = {"/","/index"})
+    @ResponseBody
     public String index(Model model, HttpServletRequest httpServletRequest) throws Exception {
         model.addAttribute("name","layui后台系统");
         model.addAttribute("username",httpServletRequest.getSession().getAttribute(SystemDefines.SESSION_USER_NAME));
-        return "index";
+        return "hello this is index! welcome " + getUser();
+    }
+    public Object getUser() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getRemoteUser();
     }
 
     /**
@@ -42,16 +51,4 @@ public class SysUserLoginController {
     public String loginPage() throws Exception {
         return "login";
     }
-
-    /*@RequestMapping("/login_failure")
-    public String loginFailure(Model model){
-        model.addAttribute("login_error", "用户名或密码错误");
-        System.out.println("haaaaaaaaaaaaaa");
-        return "loginPage";
-    }*/
-
-   /* @RequestMapping("/register")
-    public String registerPage() throws Exception {
-        return "register1";
-    }*/
 }

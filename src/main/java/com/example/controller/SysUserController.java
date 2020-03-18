@@ -1,9 +1,7 @@
 package com.example.controller;
 
 import com.example.global.constants.SwaggerUIConstants;
-import com.example.global.constants.SystemDefines;
 import com.example.model.Result;
-import com.example.security.model.MyUserDetails;
 import com.example.service.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @author zhaolei
@@ -35,17 +31,5 @@ public class SysUserController {
     @Autowired
     public SysUserController(ISysUserService sysUserService) {
         this.sysUserService = sysUserService;
-    }
-    @Autowired
-    private InMemoryUserDetailsManager inMemoryUserDetailsManager;
-
-    @ApiOperation(value = "获取系统用户")
-    @RequestMapping(value = "/querySysUser", method = RequestMethod.GET)
-    @ResponseBody
-    public Result<MyUserDetails> getSysUser(String username) throws Exception {
-
-        System.out.println("hhha:"+inMemoryUserDetailsManager.loadUserByUsername(username).getUsername());
-        System.out.println("hahah");
-        return null;
     }
 }
