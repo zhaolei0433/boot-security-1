@@ -1,5 +1,6 @@
 package com.example.config;
 
+import com.example.security.myhander.MyAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.annotation.Resource;
 
 /**
  * @author zhaolei
@@ -24,6 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${auth.skip.antMatchers}")
     private String[] auth_skip_antMatchers;
+
+    @Resource
+    private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -44,7 +50,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .inMemoryAuthentication()
                 .withUser(builder.username("admin").password("123456").roles("USER").build());
-
     }
 
     /**
@@ -59,7 +64,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(auth_skip_antMatchers).permitAll()
                 .and().formLogin()
                 .loginPage("/login")
-                .successForwardUrl("/index");
+                .successHandler(myAuthenticationSuccessHandler);
+        // 关闭csrf
+        http.csrf().disable();
     }
 
     /**
