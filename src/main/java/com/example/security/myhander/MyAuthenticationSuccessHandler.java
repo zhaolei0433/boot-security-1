@@ -28,9 +28,10 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         // 获得授权后可得到用户信息
+
         httpServletResponse.setStatus(HttpStatus.OK.value());
         httpServletResponse.setContentType("application/json;charset=UTF-8");
         httpServletResponse.getWriter().write(GsonUtil.GsonString(new Result<>("/index")));
-        LOGGER.info(" 登陆成功！session:" + httpServletRequest.getSession().getId());
+        LOGGER.info(authentication.getName()+" 登陆成功！session:" + httpServletRequest.getSession().getId());
     }
 }
