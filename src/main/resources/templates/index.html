@@ -5,7 +5,7 @@
   Description:
 -->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>layout 后台大布局 - Layui</title>
     <link rel="stylesheet" th:href="@{js/layui-v2.5.6/layui/css/layui.css}"/>
-    <link th:href="@{css/mystyle.css}" rel="stylesheet" />
+    <link th:href="@{css/mystyle.css}" rel="stylesheet"/>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -26,10 +26,10 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">系统管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a class="dianji" _href="/systemManagePage/sysUserList" ><cite>系统用户管理</cite></a></dd>
-                    <dd><a class="dianji" _href="/systemManagePage/sysRoleList" ><cite>系统角色管理</cite></a></dd>
-                    <dd><a class="dianji" _href="/systemManagePage/sysAuthList" ><cite>系统权限管理</cite></a></dd>
-                    <dd><a class="dianji" _href="/systemManagePage/sysLogList"  ><cite>系统日志管理</cite></a></dd>
+                    <dd><a class="dianji" _href="/systemManagePage/sysUserList"><cite>系统用户管理</cite></a></dd>
+                    <dd><a class="dianji" _href="/systemManagePage/sysRoleList"><cite>系统角色管理</cite></a></dd>
+                    <dd><a class="dianji" _href="/systemManagePage/sysAuthList"><cite>系统权限管理</cite></a></dd>
+                    <dd><a class="dianji" _href="/systemManagePage/sysLogList"><cite>系统日志管理</cite></a></dd>
                 </dl>
             </li>
         </ul>
@@ -50,7 +50,7 @@
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">所有商品</a>
                     <dl class="layui-nav-child">
@@ -76,12 +76,12 @@
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div class="layui-tab" lay-filter="mainTab" lay-allowclose="true" >
-            <ul class="layui-tab-title" >
+        <div class="layui-tab" lay-filter="mainTab" lay-allowclose="true">
+            <ul class="layui-tab-title">
                 <li class="home"><i class="layui-icon">&#xe68e;</i>首页</li>
             </ul>
-            <div class="layui-tab-content" >
-                <div class="layui-tab-item layui-show" >
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
                     <iframe src="" frameborder="0" scrolling="yes" class="x-iframe"></iframe>
                 </div>
             </div>
@@ -97,58 +97,63 @@
 <script>
     //JavaScript代码区域
     window.onload = index;
-    function index(){
-        if(self!=top){top.location=self.location;}
+
+    function index() {
+        if (self != top) {
+            top.location = self.location;
+        }
     }
-    layui.use('element', function(){
+
+    layui.use('element', function () {
         var element = layui.element;
         //为每个菜单选项绑定点击事件
         var $ = layui.jquery;
 
-        $(".layui-nav-child dd").click(function(event){
+        $(".layui-nav-child dd").click(function (event) {
             var url = $(this).children('a').attr('_href');
             var title = $(this).find('cite').html();
-            var index  = $('.layui-nav-child dd').index($(this));
+            var index = $('.layui-nav-child dd').index($(this));
             //遍历打开的窗口，如果当前点击的选项已经打开，则跳转到对应窗口去，不再执行for外面的两条语句创建新窗口
-            for (var i = 0; i <$('.x-iframe').length; i++) {
-                if($('.x-iframe').eq(i).attr('tab-id')==index+1){
-                    tab.tabChange(index+1);
+            for (var i = 0; i < $('.x-iframe').length; i++) {
+                if ($('.x-iframe').eq(i).attr('tab-id') == index + 1) {
+                    tab.tabChange(index + 1);
                     event.stopPropagation();
                     return;
                 }
             }
-            tab.tabAdd(title,url,index+1);
-            tab.tabChange(index+1);
+            tab.tabAdd(title, url, index + 1);
+            tab.tabChange(index + 1);
         });
         //触发事件
         var tab = {
             //添加Tab项
-            tabAdd: function(title,url,id){
+            tabAdd: function (title, url, id) {
                 //新增一个Tab项
                 element.tabAdd('mainTab', {
                     title: title,
-                    content: '<iframe tab-id="'+id+'" frameborder="0" src="'+url+'" scrolling="yes" class="x-iframe" style="height: 100%; width: 100%"></iframe>',
+                    content: '<iframe tab-id="' + id + '" frameborder="0" src="' + url + '" scrolling="yes" class="x-iframe" style="height: 100%; width: 100%"></iframe>',
                     id: id
                 });
                 settabheight();
             }
-            ,tabDelete: function(id){
+            , tabDelete: function (id) {
                 //删除指定Tab项
                 element.tabDelete('mainTab', id);
                 id.addClass('layui-btn-disabled');
             }
-            ,tabChange: function(id){
+            , tabChange: function (id) {
                 //切换到指定Tab项
                 element.tabChange('mainTab', id);
             }
         };
     });
+
     //设置tab高度
     function settabheight() {
         var $ = layui.jquery;
 
         var winheight = $(window).height();
-        var tabheight = winheight -125;
+        var tabheight = winheight - 125;
 
         $(".layui-tab-content").css("overflow", "auto");
         $(".layui-tab-content").height(tabheight - 60);

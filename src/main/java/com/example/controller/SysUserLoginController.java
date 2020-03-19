@@ -26,29 +26,32 @@ public class SysUserLoginController {
 
     /**
      * 首页
+     *
      * @param model
      * @param httpServletRequest
      * @return
      * @throws Exception
      */
-    @RequestMapping(path = {"/","/index"})
+    @RequestMapping(path = {"/", "/index"})
     @ResponseBody
     public String index(Model model, HttpServletRequest httpServletRequest) throws Exception {
-        model.addAttribute("name","layui后台系统");
-        model.addAttribute("username",httpServletRequest.getSession().getAttribute(SystemDefines.SESSION_USER_NAME));
+        /*model.addAttribute("name", "layui后台系统");
+        model.addAttribute("username", httpServletRequest.getSession().getAttribute(SystemDefines.SESSION_USER_NAME));*/
         return "hello this is index! welcome " + getUser();
     }
+
     public Object getUser() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getRemoteUser();
     }
 
     /**
      * 登录页面
+     *
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() throws Exception {
         return "login";
-    }
+    }*/
 }

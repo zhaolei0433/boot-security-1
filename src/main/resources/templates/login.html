@@ -13,7 +13,7 @@
     <title>用户登录</title>
     <link rel="stylesheet" th:href="@{js/layui-v2.5.6/layui/css/layui.css}"/>
     <style type="text/css">
-        .container{
+        .container {
             width: 420px;
             height: 320px;
             min-height: 320px;
@@ -31,7 +31,8 @@
             box-shadow: 0 3px 18px rgba(100, 0, 0, .5);
             font-size: 16px;
         }
-        .close{
+
+        .close {
             background-color: white;
             border: none;
             font-size: 18px;
@@ -39,38 +40,45 @@
             margin-top: -10px;
         }
 
-        .layui-input{
+        .layui-input {
             border-radius: 5px;
             width: 300px;
             height: 40px;
             font-size: 15px;
         }
-        .layui-form-item{
+
+        .layui-form-item {
             margin-left: -20px;
         }
-        #logoid{
+
+        #logoid {
             margin-top: -16px;
-            padding-left:100px;
+            padding-left: 100px;
             padding-bottom: 15px;
         }
-        .layui-btn{
+
+        .layui-btn {
             margin-left: -50px;
             border-radius: 5px;
             width: 350px;
             height: 40px;
             font-size: 15px;
         }
-        .verity{
+
+        .verity {
             width: 120px;
         }
-        .font-set{
+
+        .font-set {
             font-size: 13px;
             text-decoration: none;
             margin-left: 120px;
         }
-        a:hover{
+
+        a:hover {
             text-decoration: underline;
         }
+
         /*body{
             background: url("/image/login_background.png");
             background-size: 100%;
@@ -94,13 +102,15 @@
         <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-block">
-                <input type="username" name="username" id="username" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                <input type="username" name="username" id="username" required lay-verify="required" placeholder="请输入用户名"
+                       autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">密 &nbsp;&nbsp;码</label>
             <div class="layui-input-inline">
-                <input type="password" name="password" id="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                <input type="password" name="password" id="password" required lay-verify="required" placeholder="请输入密码"
+                       autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="warning" id="warning"></div>
@@ -124,21 +134,25 @@
                 <button class="layui-btn" lay-submit lay-filter="formLogin">登陆</button>
             </div>
         </div>
-        <a href="" class="font-set">忘记密码?</a>  <a href="" class="font-set">立即注册</a>
+        <a href="" class="font-set">忘记密码?</a> <a href="" class="font-set">立即注册</a>
     </div>
 </form>
 <script th:src="@{/js/layui-v2.5.6/layui/layui.js}"></script>
 <script>
     window.onload = index;
-    function index(){
-        if(self!=top){top.location=self.location;}
+
+    function index() {
+        if (self != top) {
+            top.location = self.location;
+        }
     }
-    layui.use(['form', 'layedit', 'laydate'], function(){
+
+    layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form
-            ,layer = layui.layer
-            ,layedit = layui.layedit
-            ,laydate = layui.laydate
-            ,$ = layui.jquery;
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , $ = layui.jquery;
 
         //日期
         /* laydate.render({
@@ -176,19 +190,19 @@
          });*/
 
         //监听提交
-        form.on('submit(formLogin)', function(data){
+        form.on('submit(formLogin)', function (data) {
             $.ajax({
-                url:"/login",
-                type:"post",
-                data:{
+                url: "/login",
+                type: "post",
+                data: {
                     username: $("#username").val(),
                     password: $("#password").val()
                 },
-                success:function (data) {
-                    console.log(data)
+                success: function (data) {
+                    console.log(JSON.stringify(data))
                     //window.location.href = data.data;
                 },
-                error:function (data) {
+                error: function (data) {
                     $(".warning").css("color", "#f00");
                     document.getElementById("warning").textContent = data.responseJSON.msg;
                 }
