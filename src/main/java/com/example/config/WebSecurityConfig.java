@@ -37,7 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
     /**
      * 认证管理器配置
      * 通过覆盖实现该方法，开发人员可以定制认证机制，比如设置成基于内存的认证，基于数据库的认证，基于LDAP的认证，甚至这些认证机制的一个组合，
@@ -51,7 +50,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         User.UserBuilder builder = User.builder().passwordEncoder(passwordEncoder()::encode);
         auth
                 .inMemoryAuthentication()
-                //.withUser(builder.username("zhaolei").password("123456").roles("USER").build())
                 .withUser(builder.username("admin").password("123456").roles("USER").build());
     }
 
@@ -86,6 +84,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().and().ignoring().antMatchers("/css/**", "/js/**", "/image/**");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/image/**");
     }
 }

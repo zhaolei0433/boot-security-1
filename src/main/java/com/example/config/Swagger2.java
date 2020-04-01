@@ -31,7 +31,7 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("boot-layui 在线接口文件")
+                .title("在线接口文件")
                 .description("Spring Boot boot-layui")
                 .build();
     }

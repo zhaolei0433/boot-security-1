@@ -32,7 +32,7 @@ public class SysUserLoginController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(path = {"/", "/index"})
+    @RequestMapping(path = {"/", "/index"},method = RequestMethod.GET)
     @ResponseBody
     public String index(Model model, HttpServletRequest httpServletRequest) throws Exception {
         /*model.addAttribute("name", "layui后台系统");
@@ -50,8 +50,8 @@ public class SysUserLoginController {
      * @return
      * @throws Exception
      */
-    /*@RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() throws Exception {
         return "login";
-    }*/
+    }
 }

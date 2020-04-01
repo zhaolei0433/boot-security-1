@@ -20,23 +20,4 @@ public class BootSecurity1Application {
     public static void main(String[] args) {
         SpringApplication.run(BootSecurity1Application.class, args);
     }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public UserDetailsService users() {
-        User.UserBuilder builder = User.builder().passwordEncoder(passwordEncoder()::encode);
-        UserDetails user = builder
-                .username("user")
-                .password("123456")
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(user);
-    }
-
-
-
 }
