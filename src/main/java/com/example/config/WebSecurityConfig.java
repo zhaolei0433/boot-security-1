@@ -14,8 +14,10 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
  * @author zhaolei
@@ -45,12 +47,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * @param auth
      * @throws Exception
      */
-    @Override
+   /* @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         User.UserBuilder builder = User.builder().passwordEncoder(passwordEncoder()::encode);
         auth
                 .inMemoryAuthentication()
                 .withUser(builder.username("admin").password("123456").roles("USER").build());
+    }*/
+
+    /**
+     * 基于内存的认证方式
+     *
+     * @param passwordEncoder
+     * @return
+     */
+    @Bean
+    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+        User.UserBuilder users = User.builder().passwordEncoder(passwordEncoder::encode);
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+        manager.createUser(users.username("admin").password("123456").roles("USER").build());
+        return manager;
     }
 
     /**

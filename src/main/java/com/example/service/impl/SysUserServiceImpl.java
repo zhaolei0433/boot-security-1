@@ -26,15 +26,17 @@ public class SysUserServiceImpl implements ISysUserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SysUserServiceImpl.class);
 
-
-
     @Autowired
-    public SysUserServiceImpl() {
+    private PasswordEncoder passwordEncoder;
 
-    }
+    /*@Autowired
+    InMemoryUserDetailsManager inMemoryUserDetailsManager;*/
 
     @Override
     public void addSysUser(String username, String password) {
 
+        /*User.UserBuilder builder = User.builder().passwordEncoder(passwordEncoder::encode);
+        inMemoryUserDetailsManager.createUser(builder.username("zhaolei").password("123456").roles("USER").build());
+        System.out.println("!!!!!!"+inMemoryUserDetailsManager.loadUserByUsername("admin").getUsername());*/
     }
 }
